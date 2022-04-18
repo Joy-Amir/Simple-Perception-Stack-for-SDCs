@@ -23,17 +23,20 @@ def measure_center_curvature(left_fit_coef, right_fit_coef, image_shape):
                           right_fit_coef[2]
     lane_center_x = (left_lane_bottom_x + right_lane_bottom_x) / 2
 
+    # Get the car_offset i.e the difference between the lane_center and car_center
+    car_offset = (lane_center_x - car_center_x) * xm_per_pix  # in meters
+    car_offset = round(car_offset, 3)
+
     # Get the direction of the car offset
     direction = ""
-    if lane_center_x > car_center_x:
+    if car_offset > 0:
         direction = "Go right"
-    elif lane_center_x < car_center_x:
+    elif car_offset < 0:
         direction = "Go left"
     else:
         direction = "Stay put"
 
-    # Get the car_offset i.e the difference between the lane_center and car_center
-    car_offset = np.absolute(lane_center_x - car_center_x) * xm_per_pix  # in absolute meters
+    car_offset = np.absolute(car_offset)
 
 
     ############ Calculating the radius of curvature
@@ -45,5 +48,7 @@ def measure_center_curvature(left_fit_coef, right_fit_coef, image_shape):
     # y is y_eval (where the radius should be calculated) * ym_per_pix to be in meters
     left_curve_rad = ((1 + (2*left_fit_coef[0]*y_eval*ym_per_pix + left_fit_coef[1])**2)**(3.0/2)) / np.absolute(2*left_fit_coef[0])
     right_curve_rad = ((1 + (2*right_fit_coef[0]*y_eval*ym_per_pix + right_fit_coef[1])**2)**(3.0/2)) / np.absolute(2*right_fit_coef[0])
+    curvature = np.mean(left_curve_rad, right_curve_rad)
+    curvature = round(curvature, 3)
 
-    return car_offset, direction, left_curve_rad, right_curve_rad
+    return car_offset, direction, curvature
