@@ -64,7 +64,7 @@ class Lane:
 
         return leftx, lefty, rightx, righty
 
-    def search_around_poly(self, leftpoly, rightpoly):
+    def search_around_poly(self, image, leftpoly, rightpoly):
         self.initialize_variables(image)
         margin = 100
         # if the lane has no abrupt curves, then we would expect the lane to be close to the previous found lane
@@ -92,7 +92,7 @@ class Lane:
 
 
 # Testing
-l = Lane()
-image = cv2.imread('road.jpg')
-image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-l.find_lanes(image)
+# l = Lane()
+# image = cv2.imread('road.jpg')
+# image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+# l.find_lanes(image)
