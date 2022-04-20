@@ -48,7 +48,7 @@ def measure_center_curvature(left_fit_coef, right_fit_coef, image_shape):
     # y is y_eval (where the radius should be calculated) * ym_per_pix to be in meters
     left_curve_rad = ((1 + (2*left_fit_coef[0]*y_eval*ym_per_pix + left_fit_coef[1])**2)**(3.0/2)) / np.absolute(2*left_fit_coef[0])
     right_curve_rad = ((1 + (2*right_fit_coef[0]*y_eval*ym_per_pix + right_fit_coef[1])**2)**(3.0/2)) / np.absolute(2*right_fit_coef[0])
-    curvature = np.mean(left_curve_rad, right_curve_rad)
+    curvature = (left_curve_rad + right_curve_rad) / 2.0
     curvature = round(curvature, 3)
 
-    return car_offset, direction, curvature
+    return str(car_offset), direction, str(curvature)
