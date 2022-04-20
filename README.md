@@ -18,6 +18,6 @@ run the shell script "test.sh" with passing the input_video_path as the  first a
 type sh test.sh input_video_path output_video_path 0
 or 
 sh test.sh input_video_path output_video_path 1
-you can choose 0 for debuging mode
-and 1 for no debuging mode
+you can choose 1 for debugging mode
+and 0 for no debugging mode
 
