@@ -3,14 +3,14 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
-def threshold_rel(img, lo, hi):  # lo, hi is percentage of the intensities range i have
+def threshold_rel(img, lo, hi):
     vmin = np.min(img)  # get minimum pixels in an image
     vmax = np.max(img)  # get max pixels in the image
 
-    vlo = vmin + (vmax - vmin) * lo  # interpolation on vlo, vhi to map 0.8->1 (lo->hi) to range of vmin->vmax
+    # interpolation on vlo, vhi to map (lo->hi) to range of vmin->vmax
+    vlo = vmin + (vmax - vmin) * lo
     vhi = vmin + (vmax - vmin) * hi
-    return np.uint8((img >= vlo) & (
-                img <= vhi)) * 255  # if img is within a certain range then the condition is true=1, 1*255= white pixels
+    return np.uint8((img >= vlo) & (img <= vhi)) * 255
 
 
 def threshold_abs(img, lo, hi):
@@ -28,22 +28,25 @@ def forward(img):
     hsv = cv2.cvtColor(img, cv2.COLOR_RGB2HSV)
     # All these channels are for edge detection
     h_channel = hls[:, :, 0]
-    l_channel = hls[:, :, 1]  # l_channel is used to check lightening for weather conditions of the video
+    l_channel = hls[:, :, 1]  # l_channel is used to adjust lightening to cover different weather conditions
     s_channel = hls[:, :, 2]
     v_channel = hsv[:, :, 2]
 
-    right_lane = threshold_rel(l_channel, 0.8, 1.0)  # l_channel of white color range
-    right_lane[:, :750] = 0  # why
+    right_lane = threshold_rel(l_channel, 0.86, 1.0)  # l_channel of white color range
+    right_lane[:, :750] = 0
 
-    left_lane = threshold_abs(h_channel, 20, 30)  # hue lower and upper range of yellow color
-    left_lane &= threshold_rel(v_channel, 0.7, 1.0)
+    left_lane = threshold_abs(h_channel, 20,
+                              30)  # hue lower and upper range of yellow or white color depending on the left lane color
+    left_lane &= threshold_rel(v_channel, 0.7, 1.0)  # eliminate other objects than the straight line in the left lanes
     left_lane[:, 550:] = 0
 
     img2 = left_lane | right_lane
 
     return img2
 
-image=cv2.imread("straight_lines2.jpg")
-image= cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
-im2=forward(image)
-plt.imshow(im2)
+# Test and run the function
+# image=cv2.imread("straight_lines1.jpg")
+# image= cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+# im2=forward(image)
+# plt.imshow(im2)
+
