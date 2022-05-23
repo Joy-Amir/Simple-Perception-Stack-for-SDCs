@@ -71,7 +71,7 @@ def train(colour_space, type, classifier):                          # classifier
     return
 
 # classifier: feature type is All or HOG, MLP or SVC, YUV or YCrCb
-train('YUV','All', 'SVC')
+#train('YUV','All', 'SVC')
 
 
 
