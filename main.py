@@ -28,14 +28,14 @@ else:
     resultpath = "./result.mp4"
 
 # Get required phase output
-if n > 3:
+if n > 3 and sys.argv[3].isdigit():
     phase = int(sys.argv[3])
 else:
     phase = 1
 
 # Getting the mode 0 means normal (default), 1 means debug
-if n > 4:
-    debug_mode_on = sys.argv[4]
+if n > 4 and sys.argv[3].isdigit():
+    debug_mode_on = int(sys.argv[4])
 else:
     debug_mode_on = 0
 
