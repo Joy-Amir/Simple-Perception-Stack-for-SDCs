@@ -35,7 +35,7 @@ else:
 
 # Getting the mode 0 means normal (default), 1 means debug
 if n > 4 and sys.argv[3].isdigit():
-    debug_mode_on = int(sys.argv[4])
+    debug_mode_on = sys.argv[4]
 else:
     debug_mode_on = 0
 
