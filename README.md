@@ -33,9 +33,10 @@ The project deals with video streams from cameras. <br />
 2. Run the shell script "test.sh" with the following arguments in order:<br />
     a. The input_video_path.<br />
     b. The output_video_path.<br />
-    c. 1 for debug mode and 0 otherwise.<br />
-    d. The phase to be tested: 1 for phase one and 2 for phase two.<br />
+    c. The phase to be tested: 1 for phase one and 2 for phase two.<br />
+    d. 1 for debug mode and 0 otherwise.<br />
+    
 #### Illustrative examples
       - For debug mode type of phase 1: sh test.sh ./project_video.mp4 ./result.mp4 1 1
-      - For normal mode type of phase 2: sh test.sh ./project_video.mp4 ./result.mp4 0 2
+      - For normal mode type of phase 2: sh test.sh ./project_video.mp4 ./result.mp4 2 0
 
