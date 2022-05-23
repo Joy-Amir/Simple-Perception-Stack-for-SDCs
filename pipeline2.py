@@ -43,6 +43,6 @@ def pipeline2(image, test_images, debug_mode_on):
 
     output_image = draw_background_highlight(output_image)
     draw_thumbnails(output_image, bboxes)
-    if debug_mode_on and len(bboxes) > 0:
+    if debug_mode_on == "1" and len(bboxes) > 0:
         output_image = debug_mode(output_image, mask)
     return output_image
