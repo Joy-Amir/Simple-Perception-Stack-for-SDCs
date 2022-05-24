@@ -19,6 +19,7 @@ The project deals with video streams from cameras. <br />
 1. Feature extraction using HOG, spatial and colour features.<br />
 2. Feature normalization to speed up the training.<br />
 3. Classifier training using multi-layer perceptron and support vector machines.<br />
+4. Heat Map Generation is used to reject outliers and follow the detected vehicles
 #### Classifiers Accuracy:
 |         | **MLP**  | **SVM**  |
 | :---:   | :---: | :---: |
